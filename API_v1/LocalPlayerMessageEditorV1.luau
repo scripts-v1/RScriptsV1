@@ -98,7 +98,7 @@ end
 
 
 if Methods["SaveAsChatV1"] then getgenv().ChatV1 = Methods end
-notify("Loading Astra ChatAPIV1", "Testing...")
+notify("Astra ChatAPI v1 Loaded", "@dvc")
 
 return Methods
 
