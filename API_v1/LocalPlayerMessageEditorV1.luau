@@ -1,3 +1,8 @@
+local function loadMessageEdit(toastEnabled, getgenvSavingEnabled)
+
+if not getgenvSavingEnabled then getgenvSavingEnabled = true end
+if not toastEnabled then toastEnabled = true end    
+
 assert(replicatesignal, "Missing critical function! Function: replicatesignal")
 
 local TextChatService = game:GetService("TextChatService")
@@ -9,7 +14,23 @@ local TextChannels = TextChatService:FindFirstChild("TextChannels")
 local RBXGeneral = TextChannels:FindFirstChild("RBXGeneral")
 local LocalPlayerSource = RBXGeneral[Player.Name]
 
-local Methods = {}
+
+
+local Methods = {
+        ["UseNotificationsV1"] = toastEnabled,
+        ["SaveAsChatV1"] = getgenvSavingEnabled
+}
+
+
+local function notify(txt, content)
+        if Methods.UseNotificationsV1 then
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/scripts-v1/AstraV1/refs/heads/main/GUI/NotifyToastV1.luau"))()
+                getgenv().NotifyToast({title = txt, content = content})
+
+        end
+end
+
+
 
 local Signals = {
         TextChatService.ClientToServerMessageReplicateSignalV2
@@ -44,7 +65,7 @@ function Methods:SendMessage(txt, metadata)
                 RBXGeneral      
         )
 
-
+        notify("Astra API", "Message sent!")
         return msgId, metadata
 end
 
@@ -52,8 +73,8 @@ end
 function Methods:EditLocalPlayerMessage(txt, messageID, metadata)
 
         if not string.find(messageID, tostring(Player.UserId)) then
-                warn("Invalid message / Not your message")
-                return
+                notify("Message couldn't be edited", "Reason: Invalid message / Not your message")
+                return "Invalid / Msg"
         end
 
         metadata = metadata or ""
@@ -67,6 +88,7 @@ function Methods:EditLocalPlayerMessage(txt, messageID, metadata)
                 RBXGeneral      
         )
 
+        notify("Astra API", "Message edited!")
         return messageID
 end
 
@@ -75,4 +97,9 @@ function Methods:GetLocalPlayerMessages()
 end
 
 
+if Methods["SaveAsChatV1"] then getgenv().ChatV1 = Methods end
+notify("Loading Astra ChatAPIV1", "Testing...")
+
 return Methods
+
+end
