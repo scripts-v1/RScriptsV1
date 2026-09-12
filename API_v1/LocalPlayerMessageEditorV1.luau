@@ -103,3 +103,6 @@ notify("Loading Astra ChatAPIV1", "Testing...")
 return Methods
 
 end
+
+
+return loadMessageEdit
