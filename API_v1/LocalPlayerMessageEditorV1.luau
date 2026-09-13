@@ -1,8 +1,5 @@
 local function loadMessageEdit(toastEnabled, getgenvSavingEnabled)
 
-if not getgenvSavingEnabled then getgenvSavingEnabled = true end
-if not toastEnabled then toastEnabled = true end    
-
 assert(replicatesignal, "Missing critical function! Function: replicatesignal")
 
 local TextChatService = game:GetService("TextChatService")
@@ -17,8 +14,8 @@ local LocalPlayerSource = RBXGeneral[Player.Name]
 
 
 local Methods = {
-        ["UseNotificationsV1"] = toastEnabled,
-        ["SaveAsChatV1"] = getgenvSavingEnabled
+        ["UseNotificationsV1"] = toastEnabled or true,
+        ["SaveAsChatV1"] = getgenvSavingEnabled or true
 }
 
 
@@ -101,7 +98,6 @@ if Methods["SaveAsChatV1"] then getgenv().ChatV1 = Methods end
 notify("Astra ChatAPI v1 Loaded", "@dvc")
 
 return Methods
-
 end
 
 
