@@ -14,13 +14,13 @@ local LocalPlayerSource = RBXGeneral[Player.Name]
 
 
 local Methods = {
-        ["UseNotificationsV1"] = toastEnabled,
+        ["UseNotifications"] = toastEnabled,
         ["SaveAsChatV1"] = getgenvSavingEnabled
 }
 
 
 local function notify(txt, content)
-        if Methods.UseNotificationsV1 then
+        if Methods.UseNotifications then
                 loadstring(game:HttpGet("https://raw.githubusercontent.com/scripts-v1/AstraV1/refs/heads/main/GUI/NotifyToastV1.luau"))()
                 getgenv().NotifyToast({title = txt, content = content})
 
