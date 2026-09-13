@@ -14,8 +14,8 @@ local LocalPlayerSource = RBXGeneral[Player.Name]
 
 
 local Methods = {
-        ["UseNotificationsV1"] = toastEnabled or true,
-        ["SaveAsChatV1"] = getgenvSavingEnabled or true
+        ["UseNotificationsV1"] = toastEnabled,
+        ["SaveAsChatV1"] = getgenvSavingEnabled
 }
 
 
